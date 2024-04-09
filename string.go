@@ -29,13 +29,15 @@ func StringE(v interface{}) (string, error) {
 	return cast.ToStringE(v)
 }
 
-func Md5(text string) string {
-	hash := md5.Sum([]byte(text))
-	return hex.EncodeToString(hash[:])
-}
-
 func Bs64(text string) string {
 	return b64.StdEncoding.EncodeToString(S2B(text))
+}
+
+func Md5(text string) string {
+
+	hash := md5.New()
+	hash.Write(S2B(text))
+	return hex.EncodeToString(hash.Sum(nil))
 }
 
 func URLEncode(text string) string {
